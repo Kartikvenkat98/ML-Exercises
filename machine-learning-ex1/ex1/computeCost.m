@@ -9,11 +9,11 @@ m = length(y); % number of training examples
 % You need to return the following variables correctly 
 J = 0;
 
-for i = 1:m
-	%cost[i] = [(theta'*X[i] - y[i]).^2]/2m
-	%J = J + cost[i]
-	[(theta'*X[i] - y[i]).^2]/2m
-	
+
+#for i = 1:m
+	#cost(i) = (theta(1) + theta(2)*X(i, 2) - y(i))^2;
+
+J = sum((theta(1) + theta(2)*X(:, 2) - y(:)).^2)/2*m;
 	
 
 % ====================== YOUR CODE HERE ======================
@@ -27,3 +27,5 @@ for i = 1:m
 % =========================================================================
 
 end
+
+#J = sum(cost)/2*m
