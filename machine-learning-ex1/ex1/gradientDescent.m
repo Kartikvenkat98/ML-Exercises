@@ -9,11 +9,11 @@ J_history = zeros(num_iters, 1);
 
 for iter = 1:num_iters
 	for i = 1:m
-		temp_1 = theta(1) - (X(i,:)*theta - y(i))*X(i,1)*alpha/m;
-		temp_2 = theta(2) - (X(i,:)*theta - y(i))*X(i,2)*alpha/m;
-		theta(1) = temp_1;
-		theta(2) = temp_2;
+		cost_1(i) = (X(i,:)*theta - y(i))*X(i,1)*alpha/m;
+		cost_2(i) = (X(i,:)*theta - y(i))*X(i,2)*alpha/m;
 	end
+	theta(1) = theta(1) - sum(cost_1);
+	theta(2) = theta(2) - sum(cost_2);
 
     % ====================== YOUR CODE HERE ======================
     % Instructions: Perform a single gradient step on the parameter vector
