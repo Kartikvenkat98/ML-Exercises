@@ -11,6 +11,17 @@ m = length(y); % number of training examples
 % You need to return the following variables correctly 
 J = 0;
 grad = zeros(size(theta));
+div = 2*m;
+
+cost = sum((-y).*log(sigmoid(X*theta)) - (1 - y).*log(1 - sigmoid(X*theta)))/m;
+reg = sum(theta(2:end).^2)*lambda/div;
+
+J = cost + reg;
+
+grad = (X'*(sigmoid(X*theta) - y))/m;
+temp = theta;
+temp(1) = 0;
+grad = grad + lambda/m*temp;
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta.
