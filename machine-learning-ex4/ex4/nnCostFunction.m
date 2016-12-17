@@ -29,6 +29,27 @@ m = size(X, 1);
 J = 0;
 Theta1_grad = zeros(size(Theta1));
 Theta2_grad = zeros(size(Theta2));
+div = 2*m;
+
+a1 = [ones(m, 1) X];
+z2 = a1 * Theta1';
+a2 = sigmoid(z2);
+a2 = [ones(m, 1) a2];
+z3 = a2 * Theta2';
+hypo = sigmoid(z3);
+
+for k = 1:num_labels
+	yk = y == k;
+	hypok = hypo(:, k);
+	J(k) = 1 / m * sum(-yk .* log(hypok) - (1 - yk) .* log(1 - hypok));
+	#J = J + Jk;
+end
+
+J = sum(J(:));
+
+reg = (sum(sum(Theta1(:, 2:end) .^ 2)) + sum(sum(Theta2(:, 2:end) .^ 2)))*lambda/div;
+
+J = J + reg;
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: You should complete the code by working through the
