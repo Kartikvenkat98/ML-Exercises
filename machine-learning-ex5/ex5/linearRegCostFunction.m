@@ -11,6 +11,7 @@ m = length(y); % number of training examples
 % You need to return the following variables correctly 
 J = 0;
 grad = zeros(size(theta));
+div = 2*m;
 
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost and gradient of regularized linear 
@@ -19,6 +20,13 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+
+hypo = X * theta;
+n = size(theta);
+J = 1 / div * sum((hypo - y) .^ 2) + lambda / div * sum(theta(2:n) .^ 2);
+
+grad = 1 / m * X' * (hypo - y);
+grad(2:n) = grad(2:n) + lambda / m * theta(2:n);
 
 
 
